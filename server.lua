@@ -41,26 +41,22 @@ end)
 
 RegisterServerEvent("Fax:SendCallToTeam")
 
-AddEventHandler("Fax:SendCallToTeam", function(service, desc, callid)
+AddEventHandler("Fax:SendCallToTeam", function(service, desc, callid, streetName)
 
 	local s = source
-	local coords = GetEntityCoords(Playerid(GetPlayerFromServerId(s)))
-	local street1 = GetStreetNameAtCoord(coords.x, coords.y, coords.z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
-	local streetName = (GetStreetNameFromHashKey(street1))
-
 
 
 	if service == "pd" then
 
-			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" ..streetName.. " ^4" .. desc)
+			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" .. streetName .. "] ^4" .. desc)
 
 		elseif service == "ems" then
 
-			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" ..streetName.. " ^4 " .. desc)
+			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" .. streetName .. "] ^4 " .. desc)
 
         elseif service == "all" then
 
-			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" ..streetName.. " ^4" .. desc)
+			TriggerClientEvent("chatMessage", s, "^1911 Call [ID:" .. callid .. "]^3 [LOCATION:" .. streetName .. "] ^4" .. desc)
 
 	end
 
