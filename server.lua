@@ -28,7 +28,17 @@ RegisterCommand("911", function(source, args, rawCommand)
           TriggerClientEvent("chatMessage", source, "^1Please specify a call description.")
         else
           local callid = s
-          TriggerClientEvent("Fax:SendCall", -1, service, desc, callid)
+          local x, y, z = table.unpack(GetEntityCoords(vehicle, false))
+          local streetName, crossing = GetStreetNameAtCoord(x, y, z)
+          streetName = GetStreetNameFromHashKey(streetName)
+          crossing = GetStreetNameFromHashKey(crossing)
+          local location = ""
+          if crossing ~= "" then
+            location = streetName .. " / " .. crossing
+          else
+            location = streetName
+          end
+          TriggerClientEvent("Fax:SendCall", -1, service, desc, callid, location)
           TriggerClientEvent("chatMessage", source, "^4911 Call Sent to " .. service .. ".")
           return
         end
@@ -38,7 +48,7 @@ RegisterCommand("911", function(source, args, rawCommand)
 end)
 
 RegisterServerEvent("Fax:SendCallToTeam")
-AddEventHandler("Fax:SendCallToTeam", function(desc, callid)
+AddEventHandler("Fax:SendCallToTeam", function(desc, callid, location)
     local s = source
-    TriggerClientEvent("chatMessage", s, "^4911 Call [ID:" .. callid .. "] " .. desc)
+    TriggerClientEvent("chatMessage", s, "^4911 Call [ID:" .. callid .. "][LOC: " .. location .. "] " .. desc)
 end)
