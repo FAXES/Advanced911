@@ -2,6 +2,12 @@
 --- Advanced 911, Made by FAXES ---
 -----------------------------------
 
-client_script "client.lua"
+client_scripts {
+  "teams.lua",
+  "client.lua"
+}
 
-server_script "server.lua"
+server_scripts {
+  "teams.lua",
+  "server.lua"
+}
